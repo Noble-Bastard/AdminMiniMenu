@@ -90,7 +90,7 @@ class Bastard extends PluginBase implements Listener {
          }
          $index = $data[1];
          $predlog = $data[2];
-         $playerName =self::$online[$player->getName()][$index];
+         $playerName = self::$online[$player->getName()][$index];
 
          $player2 = Server::getInstance()->getPlayer($playerName);
 
