@@ -4,13 +4,13 @@ namespace Menu;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\{Command, CommandSender};
-use pocketmine\event\Listener;
 use pocketmine\Player;
 use pocketmine\Server;
 use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI\CustomForm;
 
-class Bastard extends PluginBase implements Listener {
+class Bastard extends PluginBase
+{
 
    private static $online = [];
 
@@ -33,11 +33,11 @@ class Bastard extends PluginBase implements Listener {
    public static function AdmMenuMain($player)
    {
       $form = new SimpleForm(function (Player $player, $data) {
-        $result = $data;
-            if ($result === null) {
-               return true;
-            }
-            switch ($result) {
+         $result = $data;
+         if ($result === null) {
+            return true;
+         }
+         switch ($result) {
             case 0:
                Bastard::TellMessage($player);
                break;
@@ -50,8 +50,8 @@ class Bastard extends PluginBase implements Listener {
             case 3:
                Bastard::KickPlayer($player);
                break;
-            }
-         });
+         }
+      });
       $online = count(Server::getInstance()->getOnlinePlayers());
 
       $dir = opendir('players');
@@ -81,7 +81,7 @@ class Bastard extends PluginBase implements Listener {
       foreach (Server::getInstance()->getOnlinePlayers() as $p) {
          $players[] = $p->getName();
       }
-     self::$online[$player->getName()] = $players;
+      self::$online[$player->getName()] = $players;
 
       $form = new CustomForm(function (Player $player, array $data = null) {
          $result = $data;
@@ -102,7 +102,7 @@ class Bastard extends PluginBase implements Listener {
       });
       $form->setTitle("Кик-Меню");
       $form->addLabel("Кик игрока!");
-      $form->addDropdown("Игрок",self::$online[$player->getName()]);
+      $form->addDropdown("Игрок", self::$online[$player->getName()]);
       $form->addInput("Причина", "Нехрен было мои алмазы воровать!");
       $form->sendToPlayer($player);
    }
@@ -113,7 +113,7 @@ class Bastard extends PluginBase implements Listener {
       foreach (Server::getInstance()->getOnlinePlayers() as $p) {
          $players[] = $p->getName();
       }
-     self::$online[$player->getName()] = $players;
+      self::$online[$player->getName()] = $players;
       $form = new CustomForm(function (Player $player, array $data = null) {
          $result = $data;
          if ($result === null) {
@@ -182,5 +182,4 @@ class Bastard extends PluginBase implements Listener {
       $form->addbutton("Назад", 0);
       $form->sendToPlayer($player);
    }
-
 }
